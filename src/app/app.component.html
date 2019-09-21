@@ -1,0 +1,110 @@
+<div class="container my-4">
+  <h2>Table Row Heighlight</h2>
+
+
+<div class="row mb-2">
+  <div class="col-6">
+    <div class="row">
+      <div class="col-5 mr-n3">
+        <select class="form-control mr-2">
+          <option selected>All Groups</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col input-group">
+        <input class="form-control input-search border-right-0" [(ngModel)]="txtFilter" placeholder="Search VM">
+        <!-- <input class="form-control input-search border-right-0" [(ngModel)]="txtFilter" (ngModelChange) ="search()" placeholder="Search VM"> -->
+
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-left-0"><i class="fa fa-search"></i> </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ml-auto pr-2 pt-2">
+    <button class="btn btn-outline-primary btn-sm">Saved Images</button>
+    <button class="btn btn-default-out  btn-sm mx-2 px-3"> <i class="fa fa-plus mr-1"></i> Add..</button>
+  </div>
+</div>
+
+
+<div class="rows border" style="min-height: 286px;">
+  <table class="mb-0" cellspacing="0" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 4%">&nbsp;</th>
+        <th style="width: 35%" (click)="sort('vm_name')"> Node Name
+          <span *ngIf="sorkKey=='vm_name' && isAsc" class="fa fa-chevron-up"></span>
+          <span *ngIf="sorkKey=='vm_name' && !isAsc" class="fa fa-chevron-down"></span>
+        </th>
+        <th style="width: 20%">Public IP</th>
+        <th style="width: 20%" (click)="sort('vm_state')"> State
+          <span *ngIf="sorkKey=='vm_state' && isAsc" class="fa fa-chevron-up"></span>
+          <span *ngIf="sorkKey=='vm_state' && !isAsc" class="fa fa-chevron-down"></span>
+        </th>
+        <th class="text-center" style="width: 20%">Actions</th>
+      </tr>
+    </thead>
+    
+    <ng-container *ngFor="let row of nodes | searchListFilter: txtFilter; let i = index">
+      <tr (click)="onClick($event, row); $event.stopPropagation()" [id]="i" [class.selected]="row.checked">
+        <td *ngIf="!row.header && checkbox" class="pl-2 checkbox">
+          <label class="container">
+            <input type='checkbox' name='check' (change)="onChange($event, row); $event.stopPropagation()"
+              [checked]="row.checked">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+
+        <ng-container *ngIf="checkbox">
+          <td>{{row.vm_name}} <br> {{row.plan}}</td>
+          <td>{{row.ip_address_public}}</td>
+          <td>
+            <i class="fa fa-circle {{ addClass(row.vm_state) }} mr-1"></i>
+            {{ nodeState(row.vm_state) }}
+          </td>
+          <td class="p-0 text-center" (click)="$event.stopPropagation()">
+            <div class="btn-group" dropdown container="body" placement="bottom">
+              <button dropdownToggle type="button" class="btn btn-sm btn-outline-dark dropdownToggle"> Actions <span
+                  class="caret"></span> </button>
+              <ul *dropdownMenu class="dropdown-menu dropdown-menu-center" role="menu">
+                <li class="dropdown-item py-0" (click)="$event.stopPropagation()"><span
+                    class="wrap-h">{{row.vm_name}}</span></li>
+                <div class="dropdown-divider mt-0"></div>
+                <li class="dropdown-item py-0 px-3" [ngClass]="{'disabled': row.vm_state == 3 || row.vm_state == 5}" (click)="startVm(row, $event, i)"><i class="fa fa-play pr-2"></i> Start</li>
+                <li class="dropdown-item py-0 px-3" [ngClass]="{'disabled': row.vm_state == 4 || row.vm_state == 5}" (click)="stopVm(row, $event, i)"><i class="fa fa-stop-circle-o pr-2"></i> Stop</li>
+                <li class="dropdown-item py-0 px-3 disabled"><i class="fa fa-refresh pr-2"></i> Reboot</li>
+                <div class="dropdown-divider"></div>
+                <li class="dropdown-item py-0 px-3">Save A Copy</li>
+                <li class="dropdown-item py-0 px-3">Refresh VM</li>
+                <div class="dropdown-divider"></div>
+                <li class="dropdown-item py-0 px-3">Delete VM</li>
+              </ul>
+            </div>
+          </td>
+
+        </ng-container>
+      </tr>
+
+
+    </ng-container>
+    <!-- <tr *ngIf="config.totalItems === 0">
+      <td colspan="5">
+        <h4 class="m-4 text-center">No data found</h4>
+      </td>
+      </tr> -->
+  </table>
+  <!-- <div class="my-n2 pt-3 pull-right node-listing">
+    <pagination-controls *ngIf="config.totalItems>6" (pageChange)="pageChange($event)" maxSize="5"
+      directionLinks="true" autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next">
+    </pagination-controls>
+
+  </div> -->
+
+</div>
+
+
+</div>
+<router-outlet></router-outlet>

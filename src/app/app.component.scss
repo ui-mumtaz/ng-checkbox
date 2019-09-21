@@ -1,0 +1,186 @@
+.fa-2x {
+    font-size: 1.5em;
+  }
+  
+  .btn-outline-dark {
+    border-color: silver;
+    margin: 3px 0;
+  
+    &:hover {
+      color: #343a40;
+      background-color: transparent;
+      border-color: silver;
+    }
+  }
+  .dropdown-menu.show {
+    font-size: 0.9rem;
+  }
+  .dropdown-menu-center {
+    margin-top: -0.2rem !important;
+    left: 50% !important;
+    right: auto !important;
+    text-align: left !important;
+    transform: translate(-50%, 0) !important;
+    z-index: 9999;
+  }
+  
+  .btn-default-out {
+    color: #3e53a4;
+    background-color: transparent;
+    border-color: #9b9b9b;
+  }
+  
+  .wrap-h {
+    width: 125px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    cursor: auto;
+  }
+  
+  // table new
+  :host {
+    $selectionColor: #effeff;
+    $headColor: #e8eaee;
+    $rowHeight: 30px;
+  
+    
+    .node-listing .page-link {
+      z-index: 0 !important;
+    }
+  
+    .border-top-bottom {
+      border-top: 1px solid lightgray;
+      border-bottom: 1px solid lightgray;
+      border-left: 0;
+      border-right: 0;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Tahoma, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 13px;
+      color: #495057;
+      background-color: white;
+  
+      .thead-light {
+        background-color: $headColor;
+        &:hover {
+          background-color: $headColor;
+        }
+        tr {
+          &:hover {
+            background-color: $headColor;
+          }
+        }
+      }
+  
+      tr {
+        height: $rowHeight;
+        vertical-align: center;
+        cursor: pointer;
+        &:hover {
+          background-color: $selectionColor;
+        }
+      }
+  
+      th {
+        font-weight: 600;
+        text-align: left;
+        @extend .border-top-bottom;
+      }
+  
+      td {
+        @extend .border-top-bottom;
+  
+        input:focus::-webkit-input-placeholder {
+          color: transparent !important;
+        }
+        input:focus::-moz-placeholder {
+          color: transparent !important;
+        }
+      }
+  
+      .checkbox {
+        vertical-align: top;
+        width: 20px;
+        min-width: 20px;
+      }
+  
+      .selected {
+        background-color: $selectionColor;
+      }
+  
+      /*BELOW is for checkbox, modified from W3C*/
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        width: auto;
+        height: auto;
+        margin-top: 5px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+  
+        /* Hide the browser's default checkbox */
+        input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
+  
+        /* Create a custom checkbox */
+        .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 15px;
+          width: 15px;
+          border: 1px solid rgba(0, 0, 0, 0.54);
+          background-color: white;
+          border-radius: 2px;
+          /* Create the checkmark/indicator (hidden when not checked) */
+          &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 2px;
+            width: 3px;
+            height: 7px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+  
+        /* On mouse-over, add a grey background color */
+        &:hover input ~ .checkmark {
+          background-color: #ccc;
+        }
+  
+        /* When the checkbox is checked, add a blue background */
+        input:checked ~ .checkmark {
+          background-color: #2196f3;
+          border: 1px solid #2196f3;
+          /* Show the checkmark when checked */
+          &:after {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  
+  .form-control:focus {
+      border-color: #ced4da;
+      box-shadow: none;
+  }
+  
