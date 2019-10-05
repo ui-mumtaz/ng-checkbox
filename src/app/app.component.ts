@@ -22,12 +22,30 @@ export class AppComponent implements OnInit {
   clickToSelect = true;
   checkbox = true;
   keyColumn: string;
+  group;
+  selectedGroup;
 
   constructor(private nodeService: NodeService, private sortFilter: SortFilterPipe, private router: Router,){
     
   }
   ngOnInit() {
     this.getNodesList();
+    this.group = [
+      {id: 1, Name: 'One'},
+      {id: 2, Name: 'Two'},
+      {id: 3, Name: 'Three'},
+      {id: 4, Name: 'Four'}
+    ]
+    this.selectedGroup = 4;
+  }
+
+  onGroupSelected(val:any){
+    //api field
+    this.customSelect(val);
+  }
+
+  customSelect(val:any){
+    alert(val)
   }
 
   getNodesList() {
@@ -158,4 +176,10 @@ export class AppComponent implements OnInit {
   get key(): string {
     return this.keyColumn ? this.keyColumn : this.checkbox ? this.columns[1] : this.columns[0];
   }
+
+
+  // Bind/Get selected value / set default in select list
+
+  
+
 }

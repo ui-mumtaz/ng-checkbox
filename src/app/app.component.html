@@ -5,14 +5,15 @@
 <div class="row mb-2">
   <div class="col-6">
     <div class="row">
+
+      <!-- selected value -->
       <div class="col-5 mr-n3">
-        <select class="form-control mr-2">
-          <option selected>All Groups</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="form-control mr-2" [(ngModel)]="selectedGroup" (ngModelChange)="onGroupSelected($event)">
+          <option *ngFor="let grp of group" [value]="grp.id">{{grp.Name}}</option>
         </select>
       </div>
+
+
       <div class="col input-group">
         <input class="form-control input-search border-right-0" [(ngModel)]="txtFilter" placeholder="Search VM">
         <!-- <input class="form-control input-search border-right-0" [(ngModel)]="txtFilter" (ngModelChange) ="search()" placeholder="Search VM"> -->
